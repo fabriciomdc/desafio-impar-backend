@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AttendanceController } from './attendance.controller';
-import { CreateAttendanceService } from './attendance.service';
+import { CreateAttendanceService } from './create-attendance.service';
 import { Attendance } from './attendance.entity';
 import { randomUUID } from 'crypto';
 import { AttendanceRepository } from './attendance.repository';

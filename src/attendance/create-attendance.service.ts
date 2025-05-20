@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Attendance } from './attendance.entity';
 import { AttendanceRepository } from './attendance.repository';
+import { CreatedAttendanceTopic } from './topics/created-attendances.topic';
 
 interface CreateAttendanceServiceInput {
   name: string;
@@ -12,7 +13,10 @@ interface CreateAttendanceServiceInput {
 
 @Injectable()
 export class CreateAttendanceService {
-  constructor(private readonly attendanceRepository: AttendanceRepository) {}
+  constructor(
+    private readonly attendanceRepository: AttendanceRepository,
+    private readonly createdAttendanceTopic: CreatedAttendanceTopic,
+  ) {}
 
   async createAttendance(
     input: CreateAttendanceServiceInput,
@@ -27,7 +31,7 @@ export class CreateAttendanceService {
     });
 
     await this.attendanceRepository.create(newAttendance);
-
+    this.createdAttendanceTopic.publish(newAttendance);
     return newAttendance;
   }
 

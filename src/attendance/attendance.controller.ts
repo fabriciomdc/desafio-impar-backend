@@ -5,7 +5,7 @@ import {
   Post,
   Get,
 } from '@nestjs/common';
-import { CreateAttendanceService } from './attendance.service';
+import { CreateAttendanceService } from './create-attendance.service';
 import { Attendance } from './attendance.entity';
 
 @Controller()

@@ -8,10 +8,23 @@ import { CreatedAttendanceTopic } from 'src/attendance/topics/created-attendance
 @Module({
   imports: [
     RabbitMQModule.forRoot({
-      exchanges: [],
+      exchanges: [
+        {
+          name: 'attendances',
+          type: 'topic',
+        },
+      ],
       uri: 'amqp://desafio-impar-rabbit:rabbit@localhost:5672',
       connectionInitOptions: { wait: false },
     }),
   ],
+  providers: [
+    HandleSendAttendanceWhatsappMessage,
+    {
+      provide: CreatedAttendanceTopic,
+      useClass: RabbitmqCreatedAttendanceTopic,
+    },
+  ],
+  exports: [CreatedAttendanceTopic],
 })
 export class PubSubModule {}
