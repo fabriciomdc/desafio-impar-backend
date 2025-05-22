@@ -8,7 +8,7 @@ export async function createTables() {
       name TEXT NOT NULL,
       address TEXT NOT NULL,
       phone TEXT NOT NULL,
-      created_at TIMESTAMP NOT NULL
+      createdAt TIMESTAMP NOT NULL
     );
   `;
 }
